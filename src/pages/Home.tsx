@@ -1,13 +1,14 @@
 import { Hero } from "./home-page/Hero";
 import { Problem } from "./home-page/Problem";
+import { Solution } from "./home-page/Solution";
 
 function Home() {
   return (
     <main className="flex flex-col gap-0">
       <Hero />
       <Problem />
-      {/* <Solution />
-  <TeacherRole />
+      <Solution />
+      {/*<TeacherRole />
   <div className="relative">
     <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
     <LessonBuilder />
