@@ -1,4 +1,5 @@
 import { Hero } from "./home-page/Hero";
+import { LessonBuilder } from "./home-page/LessonBuilder";
 import { Problem } from "./home-page/Problem";
 import { Solution } from "./home-page/Solution";
 import { TeacherRole } from "./home-page/TeacherRole";
@@ -10,13 +11,13 @@ function Home() {
       <Problem />
       <Solution />
       <TeacherRole />
-      {/*<div className="relative">
-    <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
-    <LessonBuilder />
-    <AIMentor />
-    <StudyMode />
-  </div>
-  <GamifiedExamples onOpenLesson={setActiveLesson} />
+      <div className="relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
+        <LessonBuilder />
+        {/*<AIMentor />
+    <StudyMode /> */}
+      </div>
+      {/* <GamifiedExamples onOpenLesson={setActiveLesson} />
   <Dashboards />
   <Architecture />
   <FutureXR />
