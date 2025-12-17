@@ -43,7 +43,7 @@ function VrPlayer() {
     }
 
     // ---------- 2. Рух правим стиком ----------
-    let moveDir = tmpVec3.set(0, 0, 0);
+    const moveDir = tmpVec3.set(0, 0, 0);
 
     if (right) {
       const stick = right.gamepad["xr-standard-thumbstick"];
@@ -81,7 +81,7 @@ function VrPlayer() {
       // тут залежить від девайсу:
       // подивись в консоль, які є ключі у right.gamepad (trigger, primary, a, x, etc)
       const aButton = right.gamepad["xr-standard-primary-button"];
-      jumpPressed = aButton?.pressed ?? false;
+      jumpPressed = aButton?.state === "pressed";
     }
 
     let vy = vel.y;
