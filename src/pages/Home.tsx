@@ -1,7 +1,9 @@
+import { AIMentor } from "./home-page/AIMentor";
 import { Hero } from "./home-page/Hero";
 import { LessonBuilder } from "./home-page/LessonBuilder";
 import { Problem } from "./home-page/Problem";
 import { Solution } from "./home-page/Solution";
+import { StudyMode } from "./home-page/StudyMode";
 import { TeacherRole } from "./home-page/TeacherRole";
 
 function Home() {
@@ -14,8 +16,8 @@ function Home() {
       <div className="relative">
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
         <LessonBuilder />
-        {/*<AIMentor />
-    <StudyMode /> */}
+        <AIMentor />
+        <StudyMode />
       </div>
       {/* <GamifiedExamples onOpenLesson={setActiveLesson} />
   <Dashboards />
