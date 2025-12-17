@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  /* Кастомні кольори */
+  --color-accent: #34e1a1;
+  --color-dark: #0b0f19;
+  --color-darker: #05070a;
+  --color-card: #111827;
+
+  /* Шрифти */
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Exo 2", sans-serif;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Утилітарні класи для анімацій */
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+body {
+  scroll-behavior: smooth;
+  font-family: var(--font-sans);
+}
+
+.glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(52, 225, 161, 0.1);
+}
+.dark .glass-panel {
+  background: rgba(17, 24, 39, 0.7);
+  border: 1px solid rgba(52, 225, 161, 0.1);
+}
+html:not(.dark) .glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.glow-text {
+  text-shadow: 0 0 20px rgba(52, 225, 161, 0.3);
+}
+.glow-box {
+  box-shadow: 0 0 20px rgba(52, 225, 161, 0.1);
+}
+
+@keyframes blur-text {
+  0% {
+    filter: blur(0px);
+  }
+  100% {
+    filter: blur(4px);
+  }
+}
+
+@keyframes matrix-fall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.preloader-letter {
+  animation: blur-text 1.5s infinite linear alternate;
+  will-change: filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+.matrix-column {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
