@@ -327,6 +327,113 @@ body {
 .exam .navbar-text-hover:hover {
   color: #0f172a;
 }
+
+/* Theme menu dropdown colors */
+.theme-menu-dropdown {
+  background: rgba(11, 13, 12, 0.9);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+}
+
+.light .theme-menu-dropdown,
+.exam .theme-menu-dropdown {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #475569;
+}
+
+.kids .theme-menu-dropdown {
+  background: rgba(26, 31, 46, 0.95);
+  border-color: rgba(255, 107, 157, 0.2);
+  color: #c8d0e8;
+}
+
+.highcontrast .theme-menu-dropdown {
+  background: rgba(0, 0, 0, 0.98);
+  border-color: rgba(255, 255, 0, 0.5);
+  color: #ffffff;
+}
+
+.code .theme-menu-dropdown {
+  background: rgba(15, 20, 25, 0.95);
+  border-color: rgba(0, 217, 255, 0.2);
+  color: #a8b8c8;
+}
+
+/* Theme menu item colors */
+.theme-menu-item {
+  color: #cbd5e1;
+}
+
+.theme-menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+.light .theme-menu-item,
+.exam .theme-menu-item {
+  color: #64748b;
+}
+
+.light .theme-menu-item:hover,
+.exam .theme-menu-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #0f172a;
+}
+
+.kids .theme-menu-item {
+  color: #c8d0e8;
+}
+
+.kids .theme-menu-item:hover {
+  background: rgba(255, 107, 157, 0.1);
+  color: #ffffff;
+}
+
+.highcontrast .theme-menu-item {
+  color: #ffffff;
+}
+
+.highcontrast .theme-menu-item:hover {
+  background: rgba(255, 255, 0, 0.2);
+  color: #ffff00;
+}
+
+.code .theme-menu-item {
+  color: #a8b8c8;
+}
+
+.code .theme-menu-item:hover {
+  background: rgba(0, 217, 255, 0.1);
+  color: #00d9ff;
+}
+
+/* Active theme menu item */
+.theme-menu-item-active {
+  background: rgba(52, 225, 161, 0.2);
+  color: #34e1a1;
+}
+
+.light .theme-menu-item-active,
+.exam .theme-menu-item-active {
+  background: rgba(0, 102, 204, 0.15);
+  color: #0066cc;
+}
+
+.kids .theme-menu-item-active {
+  background: rgba(255, 107, 157, 0.2);
+  color: #ff6b9d;
+}
+
+.highcontrast .theme-menu-item-active {
+  background: rgba(255, 255, 0, 0.3);
+  color: #ffff00;
+}
+
+.code .theme-menu-item-active {
+  background: rgba(0, 217, 255, 0.2);
+  color: #00d9ff;
+}
 .glow-text {
   text-shadow: 0 0 20px rgba(52, 225, 161, 0.3);
 }
