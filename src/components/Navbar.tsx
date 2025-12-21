@@ -2,19 +2,14 @@ import React, { useState, useEffect } from "react";
 import { Box, Menu, X, LogOut, User } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { RoutePath } from "@/config/route-config";
+import { getDashboardPathByRole } from "@/config/roles";
 import { ThemeSelector } from "@/components/ThemeSelector";
+import { useAuthStore } from "@/stores/authStore";
+import { useAuth } from "@/hooks/useAuth";
 
-interface NavbarProps {
-  onLoginClick?: () => void;
-  user?: { email: string; role: string; name: string } | null;
-  onLogout?: () => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({
-  onLoginClick,
-  user = null,
-  onLogout,
-}) => {
+const Navbar: React.FC = () => {
+  const { user, openAuthModal, reset: resetAuthStore } = useAuthStore();
+  const { logout: firebaseLogout } = useAuth();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -92,22 +87,19 @@ const Navbar: React.FC<NavbarProps> = ({
   }, [isUserMenuOpen]);
 
   const handleLogin = () => {
-    if (onLoginClick) {
-      onLoginClick();
-    } else {
-      // Default behavior - navigate to login page or show modal
-      console.log("Login clicked");
-    }
+    openAuthModal();
   };
 
-  const handleLogout = () => {
-    if (onLogout) {
-      onLogout();
-    } else {
-      // Default behavior
-      console.log("Logout clicked");
-    }
+  const handleLogout = async () => {
     setIsUserMenuOpen(false);
+    try {
+      await firebaseLogout();
+    } catch (error) {
+      console.error("Logout error:", error);
+    } finally {
+      resetAuthStore();
+      window.location.href = RoutePath.HOME;
+    }
   };
 
   return (
@@ -165,41 +157,53 @@ const Navbar: React.FC<NavbarProps> = ({
           <ThemeSelector variant="dropdown" />
 
           {user ? (
-            <div className="relative user-menu-container">
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center gap-3 pl-2 pr-4 py-1 bg-white/5 border border-white/10 rounded-full hover:border-emerald-500/30 transition-all"
+            location.pathname === RoutePath.HOME ? (
+              // На HOME сторінці для залогіненого користувача показуємо кнопку "Відкрити Dashboard"
+              <a
+                href={getDashboardPathByRole(user.role)}
+                className="px-4 py-1.5 text-xs font-medium bg-accent text-background hover:opacity-90 rounded-full transition-all flex items-center gap-2"
               >
-                <div className="w-7 h-7 rounded-full bg-emerald-500 flex items-center justify-center text-black font-bold text-[10px]">
-                  {user.name
-                    ? user.name[0].toUpperCase()
-                    : user.email[0].toUpperCase()}
-                </div>
-                <div className="hidden sm:block text-left">
-                  <p className="text-[10px] font-bold text-white truncate max-w-[80px]">
-                    {user.name || user.email}
-                  </p>
-                </div>
-              </button>
+                <span className="w-2 h-2 bg-background rounded-full"></span>
+                Відкрити Dashboard
+              </a>
+            ) : (
+              // На інших сторінках показуємо user menu
+              <div className="relative user-menu-container">
+                <button
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                  className="flex items-center gap-3 pl-2 pr-4 py-1 bg-popover/40 border border-border/50 rounded-full hover:border-accent/30 transition-all"
+                >
+                  <div className="w-7 h-7 rounded-full bg-accent flex items-center justify-center text-background font-bold text-[10px]">
+                    {user.name
+                      ? user.name[0].toUpperCase()
+                      : user.email[0].toUpperCase()}
+                  </div>
+                  <div className="hidden sm:block text-left">
+                    <p className="text-[10px] font-bold text-foreground truncate max-w-[80px]">
+                      {user.name || user.email}
+                    </p>
+                  </div>
+                </button>
 
-              {isUserMenuOpen && (
-                <div className="absolute top-full right-0 mt-4 w-48 glass rounded-2xl shadow-2xl py-2 animate-in fade-in zoom-in-95 origin-top-right overflow-hidden">
-                  <button className="w-full px-4 py-2 text-left text-[11px] font-medium text-slate-300 hover:bg-white/5 transition-colors flex items-center gap-2">
-                    <User size={14} /> Профіль
-                  </button>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full px-4 py-2 text-left text-[11px] font-medium text-red-400 hover:bg-red-500/10 transition-colors flex items-center gap-2"
-                  >
-                    <LogOut size={14} /> Вийти
-                  </button>
-                </div>
-              )}
-            </div>
+                {isUserMenuOpen && (
+                  <div className="absolute top-full right-0 mt-4 w-48 glass rounded-2xl shadow-2xl py-2 animate-in fade-in zoom-in-95 origin-top-right overflow-hidden">
+                    <button className="w-full px-4 py-2 text-left text-[11px] font-medium text-muted-foreground hover:bg-popover/40 hover:text-foreground transition-colors flex items-center gap-2">
+                      <User size={14} /> Профіль
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full px-4 py-2 text-left text-[11px] font-medium text-destructive hover:bg-destructive/10 transition-colors flex items-center gap-2"
+                    >
+                      <LogOut size={14} /> Вийти
+                    </button>
+                  </div>
+                )}
+              </div>
+            )
           ) : (
             <button
               onClick={handleLogin}
-              className="px-4 py-1.5 text-xs font-medium bg-white text-black hover:bg-slate-200 rounded-full transition-all"
+              className="px-4 py-1.5 text-xs font-medium bg-foreground text-background hover:opacity-90 rounded-full transition-all"
             >
               Увійти
             </button>
@@ -245,7 +249,16 @@ const Navbar: React.FC<NavbarProps> = ({
             onSelect={() => setIsMobileOpen(false)}
           />
 
-          {!user && (
+          {user ? (
+            <a
+              href={getDashboardPathByRole(user.role)}
+              onClick={() => setIsMobileOpen(false)}
+              className="w-full py-4 bg-accent text-background font-bold rounded-2xl mt-4 transition-all hover:opacity-90 flex items-center justify-center gap-2"
+            >
+              <span className="w-2 h-2 bg-background rounded-full"></span>
+              Відкрити Dashboard
+            </a>
+          ) : (
             <button
               onClick={() => {
                 handleLogin();

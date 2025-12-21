@@ -1,0 +1,40 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Колекція користувачів (document ID = email користувача)
+    match /users/{userEmail} {
+      // Функція для перевірки, чи користувач має доступ до цього профілю
+      function isOwner() {
+        return request.auth != null 
+               && request.auth.token.email == userEmail;
+      }
+      
+      // Дозволити читання тільки власнику профілю
+      allow read: if isOwner();
+      
+      // Дозволити створення профілю тільки якщо:
+      // 1. Користувач автентифікований
+      // 2. Email в токені співпадає з document ID
+      // 3. Email в даних співпадає з document ID
+      allow create: if isOwner() 
+                    && request.resource.data.email == userEmail
+                    && request.resource.data.email is string;
+      
+      // Дозволити оновлення профілю тільки власнику
+      // Перевіряємо, що email не змінюється
+      allow update: if isOwner() 
+                    && request.resource.data.email == userEmail
+                    && (request.resource.data.email == resource.data.email);
+      
+      // Дозволити видалення профілю тільки власнику
+      allow delete: if isOwner();
+    }
+    
+    // Для інших колекцій - заборона за замовчуванням
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+

@@ -1,4 +1,7 @@
 import React from "react";
+import type { UserProfile } from "@/services/userService";
+import { Globe } from "lucide-react";
+import { RoutePath } from "@/config/route-config";
 import {
   Users,
   Book,
@@ -16,9 +19,38 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-export const AdminDashboard: React.FC = () => {
+interface AdminDashboardProps {
+  userProfile?: UserProfile | null;
+}
+
+export const AdminDashboard: React.FC<AdminDashboardProps> = ({
+  userProfile,
+}) => {
+  // Використовуємо дані з профілю користувача
+  const userName = userProfile?.name || "Адміністратор";
+  const userEmail = userProfile?.email || "";
+
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-700">
+      {/* Привітальний блок з інформацією користувача */}
+      {userProfile && (
+        <div className="glass rounded-[32px] p-6 border border-border/50 mb-6">
+          <div className="flex items-center gap-5 mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-foreground shadow-xl shadow-purple-500/20">
+              <Shield size={28} />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground mb-1">
+                Вітаємо, {userName}! 👋
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Email: {userEmail} • Роль: {userProfile.role}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Admin Top Header */}
       <div className="glass rounded-[32px] p-6 flex flex-col md:flex-row justify-between items-center gap-6 border border-border/50">
         <div className="flex items-center gap-5">
@@ -243,6 +275,16 @@ export const AdminDashboard: React.FC = () => {
             </div>
           </section>
         </div>
+      </div>
+      {/* Посилання "На сайт" */}
+      <div className="mt-8 pt-8 border-t border-border/50">
+        <a
+          href={RoutePath.HOME}
+          className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+        >
+          <Globe size={16} />
+          На сайт
+        </a>
       </div>
     </div>
   );

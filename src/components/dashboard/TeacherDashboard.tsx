@@ -1,4 +1,5 @@
 import React from "react";
+import type { UserProfile } from "@/services/userService";
 import {
   Plus,
   Calendar,
@@ -15,9 +16,71 @@ import {
   Sparkles,
 } from "lucide-react";
 
-export const TeacherDashboard: React.FC = () => {
+interface TeacherDashboardProps {
+  userProfile?: UserProfile | null;
+}
+
+export const TeacherDashboard: React.FC<TeacherDashboardProps> = ({
+  userProfile,
+}) => {
+  // Використовуємо дані з профілю користувача
+  const userName = userProfile?.name || "Вчитель";
+  const userEmail = userProfile?.email || "";
+  const onboardingInfo = userProfile?.onboardingInfo;
+
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-700">
+      {/* Привітальний блок з інформацією користувача */}
+      {userProfile && (
+        <div className="glass rounded-[32px] p-6 border border-border/50 mb-6">
+          <div className="flex items-center gap-5 mb-4">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-emerald-500 to-blue-500 rounded-full blur opacity-40"></div>
+              {userProfile.photoURL ? (
+                <img
+                  src={userProfile.photoURL}
+                  alt={userName}
+                  className="relative w-14 h-14 rounded-full border border-border object-cover"
+                />
+              ) : (
+                <div className="relative w-14 h-14 rounded-full bg-accent/20 border border-border flex items-center justify-center">
+                  <span className="text-xl font-bold text-foreground">
+                    {userName[0].toUpperCase()}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-foreground mb-1">
+                Вітаємо, {userName}! 👋
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Email: {userEmail}
+              </p>
+            </div>
+          </div>
+          {onboardingInfo && (
+            <div className="flex flex-wrap gap-4 text-sm pt-4 border-t border-border/50">
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground">Вік:</span>
+                <span className="text-foreground font-medium">
+                  {onboardingInfo.age} років
+                </span>
+              </div>
+              {onboardingInfo.selections &&
+                onboardingInfo.selections.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground">Інтереси:</span>
+                    <span className="text-foreground font-medium">
+                      {onboardingInfo.selections.join(", ")}
+                    </span>
+                  </div>
+                )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Top Header Glass */}
       <div className="glass rounded-[32px] p-6 flex flex-col md:flex-row justify-between items-center gap-6 border border-border/50">
         <div className="flex items-center gap-5">
@@ -31,7 +94,7 @@ export const TeacherDashboard: React.FC = () => {
           </div>
           <div>
             <h2 className="text-xl font-bold text-foreground tracking-tight">
-              Вітаємо, Анна! 👋
+              Панель вчителя
             </h2>
             <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium">
               Вчитель біології та хімії

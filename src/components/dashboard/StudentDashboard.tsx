@@ -1,4 +1,5 @@
 import React from "react";
+import type { UserProfile } from "@/services/userService";
 import {
   Play,
   BookOpen,
@@ -8,11 +9,75 @@ import {
   Activity,
   Bot,
   Sparkles,
+  Globe,
 } from "lucide-react";
+import { RoutePath } from "@/config/route-config";
 
-export const StudentDashboard: React.FC = () => {
+interface StudentDashboardProps {
+  userProfile?: UserProfile | null;
+}
+
+export const StudentDashboard: React.FC<StudentDashboardProps> = ({
+  userProfile,
+}) => {
+  // Використовуємо дані з профілю користувача
+  const userName = userProfile?.name || "Учень";
+  const userEmail = userProfile?.email || "";
+  const onboardingInfo = userProfile?.onboardingInfo;
+
   return (
     <div className="w-full space-y-8 animate-in fade-in duration-700">
+      {/* Привітальний блок з інформацією користувача */}
+      {userProfile && (
+        <div className="glass rounded-[32px] p-6 border border-border/50 mb-6">
+          <div className="flex items-center gap-5 mb-4">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-tr from-accent to-blue-500 rounded-full blur opacity-40 animate-pulse"></div>
+              {userProfile.photoURL ? (
+                <img
+                  src={userProfile.photoURL}
+                  alt={userName}
+                  className="relative w-20 h-20 rounded-full border border-border object-cover"
+                />
+              ) : (
+                <div className="relative w-20 h-20 rounded-full bg-accent/20 border border-border flex items-center justify-center">
+                  <span className="text-2xl font-bold text-foreground">
+                    {userName[0].toUpperCase()}
+                  </span>
+                </div>
+              )}
+            </div>
+            <div className="text-center md:text-left">
+              <h1 className="text-3xl font-bold text-foreground mb-1">
+                Привіт, {userName}! 👋
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Email: {userEmail}
+              </p>
+            </div>
+          </div>
+          {onboardingInfo && (
+            <div className="flex flex-wrap gap-4 text-sm pt-4 border-t border-border/50">
+              <div className="flex items-center gap-2">
+                <span className="text-muted-foreground">Вік:</span>
+                <span className="text-foreground font-medium">
+                  {onboardingInfo.age} років
+                </span>
+              </div>
+              {onboardingInfo.selections &&
+                onboardingInfo.selections.length > 0 && (
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground">Інтереси:</span>
+                    <span className="text-foreground font-medium">
+                      {onboardingInfo.selections.join(", ")}
+                    </span>
+                  </div>
+                )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Top Welcome Glass */}
       <div className="glass rounded-[32px] p-8 flex flex-col lg:flex-row justify-between items-center gap-8 border border-border/50 relative overflow-hidden group">
         <div className="absolute -top-24 -left-24 w-64 h-64 bg-accent/10 rounded-full blur-[100px] group-hover:bg-accent/15 transition-all"></div>
@@ -30,7 +95,7 @@ export const StudentDashboard: React.FC = () => {
           </div>
           <div className="text-center md:text-left">
             <h2 className="text-3xl font-bold text-foreground tracking-tight mb-2">
-              Привіт, Марко! 👋
+              Навчальний простір
             </h2>
             <div className="inline-flex items-center gap-3 px-4 py-2 bg-popover/40 border border-border rounded-2xl backdrop-blur-xl">
               <Bot size={18} className="text-accent" />
@@ -190,6 +255,17 @@ export const StudentDashboard: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Посилання "На сайт" */}
+      <div className="mt-8 pt-8 border-t border-border/50">
+        <a
+          href={RoutePath.HOME}
+          className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+        >
+          <Globe size={16} />
+          На сайт
+        </a>
       </div>
     </div>
   );

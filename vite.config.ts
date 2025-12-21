@@ -11,6 +11,17 @@ export default defineConfig({
     react({ babel: { plugins: [["babel-plugin-react-compiler"]] } }),
     basicSsl(),
   ],
+  resolve: {
+    preserveSymlinks: false,
+  },
+  optimizeDeps: {
+    include: [
+      "firebase/app",
+      "firebase/auth",
+      "firebase/analytics",
+      "firebase/firestore",
+    ],
+  },
   server: {
     host: "0.0.0.0",
     port: 5173,
