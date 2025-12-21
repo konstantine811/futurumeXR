@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Menu, X, LogOut, User } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { RoutePath } from "@/config/route-config";
 import { ThemeSelector } from "@/components/ThemeSelector";
 
@@ -21,11 +21,14 @@ const Navbar: React.FC<NavbarProps> = ({
   const location = useLocation();
 
   // Smooth scroll to section
-  const scrollToSection = (sectionId: string, e?: React.MouseEvent<HTMLAnchorElement>) => {
+  const scrollToSection = (
+    sectionId: string,
+    e?: React.MouseEvent<HTMLAnchorElement>
+  ) => {
     if (e) {
       e.preventDefault();
     }
-    
+
     // If we're not on the home page, navigate to home first
     if (location.pathname !== RoutePath.HOME) {
       window.location.href = `${RoutePath.HOME}#${sectionId}`;
@@ -43,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({
         behavior: "smooth",
       });
     }
-    
+
     setIsMobileOpen(false);
   };
 
