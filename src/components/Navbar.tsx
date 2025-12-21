@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = ({
     <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <div
         className={`glass rounded-full px-6 py-3 flex items-center justify-between gap-12 shadow-2xl shadow-black/50 transition-all duration-500 pointer-events-auto ${
-          isScrolled ? "px-8 py-4 bg-white/4" : ""
+          isScrolled ? "px-8 py-4" : ""
         }`}
       >
         <Link
@@ -118,7 +118,7 @@ const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               {isUserMenuOpen && (
-                <div className="absolute top-full right-0 mt-4 w-48 glass rounded-2xl shadow-2xl py-2 animate-in fade-in zoom-in-95 origin-top-right overflow-hidden border border-white/10">
+                <div className="absolute top-full right-0 mt-4 w-48 glass rounded-2xl shadow-2xl py-2 animate-in fade-in zoom-in-95 origin-top-right overflow-hidden">
                   <button className="w-full px-4 py-2 text-left text-[11px] font-medium text-slate-300 hover:bg-white/5 transition-colors flex items-center gap-2">
                     <User size={14} /> Профіль
                   </button>
@@ -151,7 +151,7 @@ const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
-        <div className="md:hidden absolute top-20 left-4 right-4 glass rounded-[32px] p-6 flex flex-col gap-4 shadow-2xl animate-in fade-in slide-in-from-top-4 border border-white/10 pointer-events-auto">
+        <div className="md:hidden absolute top-20 left-4 right-4 glass rounded-[32px] p-6 flex flex-col gap-4 shadow-2xl animate-in fade-in slide-in-from-top-4 pointer-events-auto">
           <Link
             to={RoutePath.CAPABILITIES}
             className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors"
