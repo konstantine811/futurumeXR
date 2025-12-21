@@ -1,5 +1,10 @@
 @import "tailwindcss";
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));
+@custom-variant kids (&:is(.kids *));
+@custom-variant highcontrast (&:is(.highcontrast *));
+@custom-variant exam (&:is(.exam *));
+@custom-variant code (&:is(.code *));
 
 @theme {
   /* Кастомні кольори */
@@ -8,9 +13,166 @@
   --color-darker: #05070a;
   --color-card: #111827;
 
-  /* Шрифти */
+  /* Shadcn UI кольори */
+  --color-background: hsl(0 0% 100%);
+  --color-foreground: hsl(222.2 84% 4.9%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(222.2 84% 4.9%);
+  --color-accent-foreground: hsl(222.2 47.4% 11.2%);
+  --color-muted: hsl(210 40% 96.1%);
+  --color-muted-foreground: hsl(215.4 16.3% 46.9%);
+  --color-border: hsl(214.3 31.8% 91.4%);
+  --color-destructive: hsl(0 84.2% 60.2%);
+
+  /* Шрифти за замовчуванням */
   --font-sans: "Inter", sans-serif;
   --font-display: "Exo 2", sans-serif;
+}
+
+/* Light theme */
+.light {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1a1a1a;
+  --color-accent: #0066cc;
+  --color-accent-foreground: #ffffff;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #666666;
+  --color-border: #e0e0e0;
+  --color-destructive: #cc0000;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Exo 2", sans-serif;
+}
+
+/* Dark theme (Core) */
+.dark {
+  --color-background: #0b0d0c;
+  --color-foreground: #e8f9f0;
+  --color-popover: #0b0d0c;
+  --color-popover-foreground: #e8f9f0;
+  --color-accent: #34e1a1;
+  --color-accent-foreground: #0b0d0c;
+  --color-muted: #141716;
+  --color-muted-foreground: #b8d4c5;
+  --color-border: #1f2321;
+  --color-destructive: #ff6b6b;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Exo 2", sans-serif;
+}
+
+/* Kids theme */
+.kids {
+  --color-background: #1a1f2e;
+  --color-foreground: #ffffff;
+  --color-popover: #1a1f2e;
+  --color-popover-foreground: #ffffff;
+  --color-accent: #ff6b9d;
+  --color-accent-foreground: #ffffff;
+  --color-muted: #252b3d;
+  --color-muted-foreground: #c8d0e8;
+  --color-border: #2f3547;
+  --color-destructive: #ff6b6b;
+  --font-sans: "Nunito", "Comic Sans MS", sans-serif;
+  --font-display: "Fredoka One", "Nunito", sans-serif;
+}
+
+/* High Contrast theme */
+.highcontrast {
+  --color-background: #000000;
+  --color-foreground: #ffffff;
+  --color-popover: #000000;
+  --color-popover-foreground: #ffffff;
+  --color-accent: #ffff00;
+  --color-accent-foreground: #000000;
+  --color-muted: #1a1a1a;
+  --color-muted-foreground: #ffffff;
+  --color-border: #ffffff;
+  --color-destructive: #ff0000;
+  --font-sans: "Arial", sans-serif;
+  --font-display: "Arial Black", sans-serif;
+}
+
+/* Exam theme */
+.exam {
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1a1a1a;
+  --color-accent: #0066cc;
+  --color-accent-foreground: #ffffff;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #666666;
+  --color-border: #e0e0e0;
+  --color-destructive: #cc0000;
+  --font-sans: "Times New Roman", serif;
+  --font-display: "Georgia", serif;
+}
+
+/* Code theme (Teens) */
+.code {
+  --color-background: #0f1419;
+  --color-foreground: #e8f0f5;
+  --color-popover: #0f1419;
+  --color-popover-foreground: #e8f0f5;
+  --color-accent: #00d9ff;
+  --color-accent-foreground: #0f1419;
+  --color-muted: #1a1f26;
+  --color-muted-foreground: #a8b8c8;
+  --color-border: #252a33;
+  --color-destructive: #ff4757;
+  --font-sans: "Fira Code", "Courier New", monospace;
+  --font-display: "JetBrains Mono", "Courier New", monospace;
+}
+
+/* Apply theme-specific fonts */
+.light *,
+.exam * {
+  font-family: var(--font-sans, "Inter", sans-serif);
+}
+
+.dark * {
+  font-family: var(--font-sans, "Inter", sans-serif);
+}
+
+.kids * {
+  font-family: var(--font-sans, "Nunito", sans-serif);
+}
+
+.highcontrast * {
+  font-family: var(--font-sans, "Arial", sans-serif);
+}
+
+.code * {
+  font-family: var(--font-sans, "Fira Code", monospace);
+}
+
+/* Apply font-display for headings */
+.light .font-display,
+.light [class*="font-display"],
+.exam .font-display,
+.exam [class*="font-display"] {
+  font-family: var(--font-display, "Exo 2", sans-serif) !important;
+}
+
+.dark .font-display,
+.dark [class*="font-display"] {
+  font-family: var(--font-display, "Exo 2", sans-serif) !important;
+}
+
+.kids .font-display,
+.kids [class*="font-display"] {
+  font-family: var(--font-display, "Fredoka One", sans-serif) !important;
+}
+
+.highcontrast .font-display,
+.highcontrast [class*="font-display"] {
+  font-family: var(--font-display, "Arial Black", sans-serif) !important;
+}
+
+.code .font-display,
+.code [class*="font-display"] {
+  font-family: var(--font-display, "JetBrains Mono", monospace) !important;
 }
 
 @keyframes float {
@@ -34,7 +196,44 @@
 
 body {
   scroll-behavior: smooth;
+  font-family: var(--font-sans, "Inter", sans-serif);
+}
+
+/* Apply theme-specific fonts */
+.light body,
+.exam body {
   font-family: var(--font-sans);
+}
+
+.dark body {
+  font-family: var(--font-sans);
+}
+
+.kids body {
+  font-family: var(--font-sans);
+}
+
+.highcontrast body {
+  font-family: var(--font-sans);
+}
+
+.code body {
+  font-family: var(--font-sans);
+}
+
+/* Theme background colors */
+.dark body,
+.kids body,
+.highcontrast body,
+.code body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+}
+
+.light body,
+.exam body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
 }
 
 .glass-panel {
@@ -42,13 +241,41 @@ body {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(52, 225, 161, 0.1);
 }
+
+/* Dark theme */
 .dark .glass-panel {
-  background: rgba(17, 24, 39, 0.7);
-  border: 1px solid rgba(52, 225, 161, 0.1);
+  background: rgba(11, 13, 12, 0.7);
+  border: 1px solid rgba(52, 225, 161, 0.2);
 }
-html:not(.dark) .glass-panel {
+
+/* Light theme */
+.light .glass-panel {
   background: rgba(255, 255, 255, 0.7);
   border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Kids theme */
+.kids .glass-panel {
+  background: rgba(26, 31, 46, 0.7);
+  border: 1px solid rgba(255, 107, 157, 0.2);
+}
+
+/* High Contrast theme */
+.highcontrast .glass-panel {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid rgba(255, 255, 0, 0.5);
+}
+
+/* Exam theme */
+.exam .glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 102, 204, 0.2);
+}
+
+/* Code theme */
+.code .glass-panel {
+  background: rgba(15, 20, 25, 0.7);
+  border: 1px solid rgba(0, 217, 255, 0.2);
 }
 .glow-text {
   text-shadow: 0 0 20px rgba(52, 225, 161, 0.3);

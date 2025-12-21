@@ -1,37 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Cpu, Sun, Moon } from "lucide-react";
+import { Menu, X, Cpu, Palette } from "lucide-react";
 import { Link } from "react-router-dom";
 import { RoutePath } from "@/config/route-config";
 import { txtConfig } from "@/config/txt-config";
+import { setTheme, getTheme, THEMES, THEME_LABELS, type Theme } from "@/utils/theme";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [currentTheme, setCurrentTheme] = useState<Theme>("dark");
 
   useEffect(() => {
     // Initialize state from DOM or localStorage
-    if (document.documentElement.classList.contains("dark")) {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    const savedTheme = getTheme();
+    setCurrentTheme(savedTheme);
 
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    if (theme === "dark") {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      setTheme("light");
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      setTheme("dark");
-    }
+  const handleThemeChange = (newTheme: Theme) => {
+    setTheme(newTheme);
+    setCurrentTheme(newTheme);
   };
 
   return (
@@ -64,14 +64,34 @@ const Navbar: React.FC = () => {
           >
             Roadmap
           </Link>
-
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-            aria-label="Toggle theme"
+          <Link
+            to={RoutePath.THEME_SETTINGS}
+            className="hover:text-accent transition-colors"
           >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+            Тема
+          </Link>
+
+          <Menubar className="border-none bg-transparent shadow-none h-auto">
+            <MenubarMenu>
+              <MenubarTrigger className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300 flex items-center gap-2 data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800 h-auto">
+                <Palette size={20} />
+                <span className="text-sm hidden lg:inline">{THEME_LABELS[currentTheme]}</span>
+              </MenubarTrigger>
+              <MenubarContent align="end" className="w-40">
+                <MenubarRadioGroup value={currentTheme}>
+                  {THEMES.map((themeOption) => (
+                    <MenubarRadioItem
+                      key={themeOption}
+                      value={themeOption}
+                      onSelect={() => handleThemeChange(themeOption)}
+                    >
+                      {THEME_LABELS[themeOption]}
+                    </MenubarRadioItem>
+                  ))}
+                </MenubarRadioGroup>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
         </div>
 
         <div className="hidden md:block">
@@ -81,12 +101,26 @@ const Navbar: React.FC = () => {
         </div>
 
         <div className="md:hidden flex items-center gap-4">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300"
-          >
-            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+          <Menubar className="border-none bg-transparent shadow-none h-auto">
+            <MenubarMenu>
+              <MenubarTrigger className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-300 data-[state=open]:bg-slate-100 dark:data-[state=open]:bg-slate-800 h-auto">
+                <Palette size={20} />
+              </MenubarTrigger>
+              <MenubarContent align="end" className="w-40">
+                <MenubarRadioGroup value={currentTheme}>
+                  {THEMES.map((themeOption) => (
+                    <MenubarRadioItem
+                      key={themeOption}
+                      value={themeOption}
+                      onSelect={() => handleThemeChange(themeOption)}
+                    >
+                      {THEME_LABELS[themeOption]}
+                    </MenubarRadioItem>
+                  ))}
+                </MenubarRadioGroup>
+              </MenubarContent>
+            </MenubarMenu>
+          </Menubar>
 
           <button
             className="text-slate-900 dark:text-slate-300"

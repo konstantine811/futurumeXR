@@ -2,11 +2,10 @@
  * Ініціалізація теми додатку
  * Перевіряє localStorage та встановлює темну тему за замовчуванням
  */
+import { setTheme, getTheme, type Theme } from "./theme";
+
 export function initTheme() {
-  if (localStorage.theme === "dark" || (!("theme" in localStorage) && true)) {
-    // default to dark
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
+  const savedTheme = localStorage.theme as Theme | undefined;
+  const theme = savedTheme || "dark";
+  setTheme(theme);
 }
