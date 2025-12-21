@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { Palette } from "lucide-react";
-import { getTheme, setTheme, THEMES, THEME_LABELS, type Theme } from "@/utils/theme";
+import {
+  getTheme,
+  setTheme,
+  THEMES,
+  THEME_LABELS,
+  type Theme,
+} from "@/utils/theme";
 import {
   Menubar,
   MenubarContent,
@@ -24,105 +30,105 @@ interface ColorToken {
 }
 
 const COLOR_TOKENS: ColorToken[] = [
-  { 
-    name: "Фон", 
-    key: "background", 
-    light: "#FFFFFF", 
-    dark: "#0B0D0C", 
-    kids: "#1A1F2E", 
-    highcontrast: "#000000", 
-    exam: "#FFFFFF", 
-    code: "#0F1419" 
+  {
+    name: "Фон",
+    key: "background",
+    light: "#FFFFFF",
+    dark: "#0B0D0C",
+    kids: "#1A1F2E",
+    highcontrast: "#000000",
+    exam: "#FFFFFF",
+    code: "#0F1419",
   },
-  { 
-    name: "Поверхня", 
-    key: "surface", 
-    light: "#F5F5F5", 
-    dark: "#141716", 
-    kids: "#252B3D", 
-    highcontrast: "#1A1A1A", 
-    exam: "#F5F5F5", 
-    code: "#1A1F26" 
+  {
+    name: "Поверхня",
+    key: "surface",
+    light: "#F5F5F5",
+    dark: "#141716",
+    kids: "#252B3D",
+    highcontrast: "#1A1A1A",
+    exam: "#F5F5F5",
+    code: "#1A1F26",
   },
-  { 
-    name: "Акцент", 
-    key: "accent", 
-    light: "#0066CC", 
-    dark: "#34E1A1", 
-    kids: "#FF6B9D", 
-    highcontrast: "#FFFF00", 
-    exam: "#0066CC", 
-    code: "#00D9FF" 
+  {
+    name: "Акцент",
+    key: "accent",
+    light: "#0066CC",
+    dark: "#34E1A1",
+    kids: "#FF6B9D",
+    highcontrast: "#FFFF00",
+    exam: "#0066CC",
+    code: "#00D9FF",
   },
-  { 
-    name: "Текст", 
-    key: "text", 
-    light: "#1A1A1A", 
-    dark: "#E8F9F0", 
-    kids: "#FFFFFF", 
-    highcontrast: "#FFFFFF", 
-    exam: "#1A1A1A", 
-    code: "#E8F0F5" 
+  {
+    name: "Текст",
+    key: "text",
+    light: "#1A1A1A",
+    dark: "#E8F9F0",
+    kids: "#FFFFFF",
+    highcontrast: "#FFFFFF",
+    exam: "#1A1A1A",
+    code: "#E8F0F5",
   },
-  { 
-    name: "Текст вторинний", 
-    key: "text-secondary", 
-    light: "#666666", 
-    dark: "#B8D4C5", 
-    kids: "#C8D0E8", 
-    highcontrast: "#FFFFFF", 
-    exam: "#666666", 
-    code: "#A8B8C8" 
+  {
+    name: "Текст вторинний",
+    key: "text-secondary",
+    light: "#666666",
+    dark: "#B8D4C5",
+    kids: "#C8D0E8",
+    highcontrast: "#FFFFFF",
+    exam: "#666666",
+    code: "#A8B8C8",
   },
-  { 
-    name: "Межа", 
-    key: "border", 
-    light: "#E0E0E0", 
-    dark: "#1F2321", 
-    kids: "#2F3547", 
-    highcontrast: "#FFFFFF", 
-    exam: "#E0E0E0", 
-    code: "#252A33" 
+  {
+    name: "Межа",
+    key: "border",
+    light: "#E0E0E0",
+    dark: "#1F2321",
+    kids: "#2F3547",
+    highcontrast: "#FFFFFF",
+    exam: "#E0E0E0",
+    code: "#252A33",
   },
-  { 
-    name: "Успіх", 
-    key: "success", 
-    light: "#00AA44", 
-    dark: "#34E1A1", 
-    kids: "#4ECDC4", 
-    highcontrast: "#00FF00", 
-    exam: "#00AA44", 
-    code: "#00FF88" 
+  {
+    name: "Успіх",
+    key: "success",
+    light: "#00AA44",
+    dark: "#34E1A1",
+    kids: "#4ECDC4",
+    highcontrast: "#00FF00",
+    exam: "#00AA44",
+    code: "#00FF88",
   },
-  { 
-    name: "Попередження", 
-    key: "warning", 
-    light: "#FF8800", 
-    dark: "#FFB84D", 
-    kids: "#FFE66D", 
-    highcontrast: "#FFAA00", 
-    exam: "#FF8800", 
-    code: "#FFB84D" 
+  {
+    name: "Попередження",
+    key: "warning",
+    light: "#FF8800",
+    dark: "#FFB84D",
+    kids: "#FFE66D",
+    highcontrast: "#FFAA00",
+    exam: "#FF8800",
+    code: "#FFB84D",
   },
-  { 
-    name: "Помилка", 
-    key: "error", 
-    light: "#CC0000", 
-    dark: "#FF6B6B", 
-    kids: "#FF6B6B", 
-    highcontrast: "#FF0000", 
-    exam: "#CC0000", 
-    code: "#FF4757" 
+  {
+    name: "Помилка",
+    key: "error",
+    light: "#CC0000",
+    dark: "#FF6B6B",
+    kids: "#FF6B6B",
+    highcontrast: "#FF0000",
+    exam: "#CC0000",
+    code: "#FF4757",
   },
-  { 
-    name: "Інформація", 
-    key: "info", 
-    light: "#0066CC", 
-    dark: "#4DABF7", 
-    kids: "#95E1D3", 
-    highcontrast: "#00AAFF", 
-    exam: "#0066CC", 
-    code: "#5B8DEF" 
+  {
+    name: "Інформація",
+    key: "info",
+    light: "#0066CC",
+    dark: "#4DABF7",
+    kids: "#95E1D3",
+    highcontrast: "#00AAFF",
+    exam: "#0066CC",
+    code: "#5B8DEF",
   },
 ];
 
@@ -175,14 +181,17 @@ function ThemeSettings() {
                     Mode
                   </label>
                   <Menubar className="border-none bg-transparent shadow-none h-auto w-full">
-                    <MenubarMenu className="w-full">
+                    <MenubarMenu>
                       <MenubarTrigger className="w-full justify-between hover:bg-slate-100 dark:hover:bg-slate-800">
                         <span className="flex items-center gap-2">
                           <Palette size={16} />
                           {THEME_LABELS[currentTheme]}
                         </span>
                       </MenubarTrigger>
-                      <MenubarContent align="start" className="w-full min-w-[200px]">
+                      <MenubarContent
+                        align="start"
+                        className="w-full min-w-[200px]"
+                      >
                         <MenubarRadioGroup value={currentTheme}>
                           {THEMES.map((themeOption) => (
                             <MenubarRadioItem
@@ -241,7 +250,8 @@ function ThemeSettings() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {COLOR_TOKENS.map((token) => {
                   const color = getColorForTheme(token, currentTheme);
-                  const displayValue = tokenFormat === "HEX" ? color : getCssVar(token.key);
+                  const displayValue =
+                    tokenFormat === "HEX" ? color : getCssVar(token.key);
 
                   return (
                     <div
@@ -273,4 +283,3 @@ function ThemeSettings() {
 }
 
 export default ThemeSettings;
-
