@@ -277,6 +277,56 @@ body {
   background: rgba(15, 20, 25, 0.7);
   border: 1px solid rgba(0, 217, 255, 0.2);
 }
+
+/* Glass effect for navbar */
+.glass {
+  background: rgba(17, 24, 39, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass,
+.kids .glass,
+.highcontrast .glass,
+.code .glass {
+  background: rgba(11, 13, 12, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.light .glass,
+.exam .glass {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Navbar text colors for themes */
+.navbar-text {
+  color: #ffffff;
+}
+
+.light .navbar-text,
+.exam .navbar-text {
+  color: #1e293b;
+}
+
+.navbar-text-secondary {
+  color: #94a3b8;
+}
+
+.light .navbar-text-secondary,
+.exam .navbar-text-secondary {
+  color: #475569;
+}
+
+.navbar-text-hover:hover {
+  color: #ffffff;
+}
+
+.light .navbar-text-hover:hover,
+.exam .navbar-text-hover:hover {
+  color: #0f172a;
+}
 .glow-text {
   text-shadow: 0 0 20px rgba(52, 225, 161, 0.3);
 }
@@ -315,4 +365,20 @@ body {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
+}
+
+/* Theme menu animations */
+@keyframes themeMenuFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.theme-menu-dropdown {
+  animation: themeMenuFadeIn 0.2s ease-out;
 }
