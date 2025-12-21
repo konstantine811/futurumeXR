@@ -280,9 +280,9 @@ body {
 
 /* Glass effect for navbar */
 .glass {
-  background: rgba(17, 24, 39, 0.6);
-  backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background: rgba(17, 24, 39, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -290,12 +290,16 @@ body {
 .kids .glass,
 .highcontrast .glass,
 .code .glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   background: rgba(11, 13, 12, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .light .glass,
 .exam .glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
