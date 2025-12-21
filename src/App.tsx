@@ -4,6 +4,7 @@ import Preloader from "./components/Preloader";
 import { RoutePath } from "./config/route-config";
 import Navbar from "./components/Navbar";
 import PageTransition from "./components/PageTransition";
+import { Footer } from "./components/Footer";
 
 // Ліниве завантаження сторінок
 const Home = lazy(() => import("./pages/Home"));
@@ -22,10 +23,14 @@ function App() {
               <Route path={RoutePath.HOME} element={<Home />} />
               <Route path={RoutePath.CAPABILITIES} element={<Capabilities />} />
               <Route path={RoutePath.ROADMAP} element={<Roadmap />} />
-              <Route path={RoutePath.THEME_SETTINGS} element={<ThemeSettings />} />
+              <Route
+                path={RoutePath.THEME_SETTINGS}
+                element={<ThemeSettings />}
+              />
             </Routes>
           </PageTransition>
         </Suspense>
+        <Footer />
       </div>
     </BrowserRouter>
   );

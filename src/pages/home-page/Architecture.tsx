@@ -1,14 +1,15 @@
-import { Section, SectionTitle } from "@/components/ui/Section";
 import React from "react";
+import { Section, SectionTitle } from "@/components/ui/Section";
 
-const ModuleCard: React.FC<{ title: string; color?: string }> = ({
-  title,
-  color = "border-slate-300 dark:border-slate-700",
-}) => (
+const ModuleCard: React.FC<{
+  title: string;
+  color?: string;
+  accent?: string;
+}> = ({ title, color = "border-border/50", accent = "bg-popover/40" }) => (
   <div
-    className={`bg-white dark:bg-darker p-4 rounded-xl border ${color} text-center shadow-lg`}
+    className={`glass p-4 rounded-2xl border ${color} ${accent} text-center shadow-lg hover:scale-105 transition-transform duration-500`}
   >
-    <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">
+    <span className="text-foreground font-bold text-xs uppercase tracking-widest">
       {title}
     </span>
   </div>
@@ -18,52 +19,59 @@ export const Architecture: React.FC = () => {
   return (
     <Section gridBg>
       <SectionTitle
-        subtitle="Інтелектуальна, модульна, готова до XR"
+        subtitle="Інтелектуальна, модульна та повністю готова до XR-майбутнього."
         align="center"
       >
         Архітектура Системи
       </SectionTitle>
 
-      <div className="max-w-4xl mx-auto mt-12 relative">
-        {/* Connecting Lines (Simulated) */}
-        <div className="absolute top-1/2 left-0 w-full h-1 bg-slate-200 dark:bg-slate-800 -translate-y-1/2 z-0"></div>
-        <div className="absolute top-12 bottom-12 left-1/2 w-1 bg-slate-200 dark:bg-slate-800 -translate-x-1/2 z-0"></div>
+      <div className="max-w-5xl mx-auto mt-20 relative">
+        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-border/50 to-transparent -translate-y-1/2 z-0"></div>
 
-        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
           {/* Core Layer */}
-          <div className="space-y-4 flex flex-col justify-center">
-            <div className="text-xs text-slate-500 uppercase tracking-widest text-center mb-2">
-              Core Modules
+          <div className="space-y-4 flex flex-col gap-2">
+            <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.3em] text-center mb-4">
+              Core Engines
             </div>
-            <ModuleCard title="Lesson Builder" color="border-accent" />
+            <ModuleCard
+              title="Lesson Builder"
+              color="border-accent/30"
+              accent="bg-accent/5"
+            />
             <ModuleCard title="Materials Hub" />
-            <ModuleCard title="Study Mode" color="border-accent" />
+            <ModuleCard
+              title="Study Mode"
+              color="border-accent/30"
+              accent="bg-accent/5"
+            />
           </div>
 
           {/* Brain Layer */}
-          <div className="space-y-4 flex flex-col justify-center py-12 md:py-0">
-            <div className="aspect-square rounded-full bg-slate-50 dark:bg-slate-900 border-4 border-slate-200 dark:border-slate-800 flex items-center justify-center relative shadow-[0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_50px_rgba(0,0,0,0.5)]">
-              <div className="absolute inset-0 bg-accent/5 rounded-full animate-pulse"></div>
-              <div className="text-center p-6">
-                <h4 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <div className="flex justify-center py-12 md:py-0">
+            <div className="w-56 h-56 rounded-full glass border border-border/50 flex items-center justify-center relative shadow-[0_0_60px_rgba(52,225,161,0.15)] group">
+              <div className="absolute inset-0 bg-accent/5 rounded-full animate-pulse group-hover:bg-accent/10 transition-all"></div>
+              <div className="text-center p-6 relative z-10">
+                <div className="text-xs text-accent font-bold uppercase tracking-widest mb-1">
+                  Central
+                </div>
+                <h4 className="text-2xl font-bold text-foreground tracking-tight">
                   AI Mentor
                 </h4>
-                <span className="text-xs text-accent">
-                  Central Intelligence
-                </span>
+                <div className="mt-2 h-1 w-12 bg-accent mx-auto rounded-full"></div>
               </div>
             </div>
           </div>
 
-          {/* Interface & Expansion Layer */}
-          <div className="space-y-4 flex flex-col justify-center">
-            <div className="text-xs text-slate-500 uppercase tracking-widest text-center mb-2">
+          {/* Interface Layer */}
+          <div className="space-y-4 flex flex-col gap-2">
+            <div className="text-[10px] text-muted-foreground uppercase font-bold tracking-[0.3em] text-center mb-4">
               Interfaces
             </div>
-            <ModuleCard title="Dashboards (T/S/A)" />
-            <ModuleCard title="Communication Hub" />
-            <div className="bg-gradient-to-r from-purple-100 to-indigo-100 dark:from-purple-900/40 dark:to-indigo-900/40 p-4 rounded-xl border border-purple-500/50 text-center shadow-[0_0_15px_rgba(168,85,247,0.2)]">
-              <span className="text-purple-700 dark:text-purple-200 font-bold text-sm">
+            <ModuleCard title="Dashboards 2.0" />
+            <ModuleCard title="LMS Sync" />
+            <div className="glass p-5 rounded-2xl border border-purple-500/40 bg-purple-500/5 text-center shadow-[0_0_20px_rgba(168,85,247,0.1)]">
+              <span className="text-purple-400 font-black text-xs uppercase tracking-[0.2em]">
                 XR Expansion Layer
               </span>
             </div>

@@ -30,14 +30,15 @@ export const Problem: React.FC = () => {
     <section className="relative py-20 md:py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"></div>
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-500/10 blur-[120px] rounded-full pointer-events-none"></div>
-      
+
       <div className="relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-4 tracking-tight">
             Проблема сучасної освіти
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Традиційна система освіти стикається з критичними викликами, які неможливо ігнорувати.
+            Традиційна система освіти стикається з критичними викликами, які
+            неможливо ігнорувати.
           </p>
           <div className="h-1 w-24 bg-destructive mt-6 mx-auto rounded-full" />
         </div>

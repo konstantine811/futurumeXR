@@ -10,7 +10,7 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
     <section className="relative pt-40 pb-20 overflow-hidden min-h-screen flex flex-col justify-center">
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"></div>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-muted/30 border border-border/50 text-accent text-xs font-medium mb-8 backdrop-blur-sm animate-float">
           <span className="flex h-1.5 w-1.5 relative">
@@ -19,26 +19,25 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
           </span>
           WEB-LMS 2.0 вже доступна
         </div>
-        
+
         <h1 className="text-6xl md:text-8xl font-display font-bold text-foreground tracking-tighter mb-8 leading-[1.1] animate-in fade-in slide-in-from-bottom-8 duration-700">
-          FuturumXR{" "}
-          <span className="text-gradient-primary">LMS</span>
+          FuturumXR <span className="text-gradient-primary">LMS</span>
         </h1>
-        
+
         <h2 className="text-xl md:text-3xl font-light text-muted-foreground mb-6 max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-700">
           <span className="text-foreground font-semibold">
             AI + Learning + XR
           </span>{" "}
           для сучасної школи та академії
         </h2>
-        
+
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed font-light animate-in fade-in slide-in-from-bottom-8 duration-1000">
           Перетворюємо пасивне навчання на інтерактивний досвід. Платформа, що
           об'єднує класичну освіту з технологіями майбутнього.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mb-20 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-          <button 
+          <button
             onClick={onGetStarted}
             className="group relative px-8 py-4 bg-foreground text-background rounded-full font-medium transition-all hover:scale-105 active:scale-95 overflow-hidden"
           >
@@ -65,11 +64,13 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
               </div>
               <div className="flex items-center gap-2 px-3 py-1 bg-muted/30 rounded-full border border-border/50">
                 <Lock className="w-3 h-3 text-accent" />
-                <span className="text-[10px] text-muted-foreground font-mono">futurum-xr.edu</span>
+                <span className="text-[10px] text-muted-foreground font-mono">
+                  futurum-xr.edu
+                </span>
               </div>
               <div className="w-6"></div>
             </div>
-            
+
             <div className="p-6 grid grid-cols-12 gap-6 min-h-[400px]">
               <div className="col-span-12 md:col-span-2 hidden md:flex flex-col gap-2 border-r border-border/60 pr-6">
                 <div className="h-10 w-full bg-muted/50 rounded-lg mb-6"></div>
@@ -82,12 +83,20 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
               <div className="col-span-12 md:col-span-10 text-left">
                 <div className="flex justify-between items-end mb-8">
                   <div>
-                    <div className="text-xs text-accent font-mono mb-2 uppercase tracking-widest">Study Mode • Active</div>
-                    <h2 className="text-2xl text-foreground font-medium">Анатомія людини: Серце</h2>
+                    <div className="text-xs text-accent font-mono mb-2 uppercase tracking-widest">
+                      Study Mode • Active
+                    </div>
+                    <h2 className="text-2xl text-foreground font-medium">
+                      Анатомія людини: Серце
+                    </h2>
                   </div>
                   <div className="flex gap-2">
-                    <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center text-foreground text-[10px] font-bold">AI</div>
-                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-background font-bold text-[10px]">XR</div>
+                    <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center text-foreground text-[10px] font-bold">
+                      AI
+                    </div>
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-background font-bold text-[10px]">
+                      XR
+                    </div>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -103,7 +112,8 @@ export const Hero: React.FC<HeroProps> = ({ onGetStarted }) => {
                     </div>
                     <div className="space-y-3 overflow-hidden flex-1">
                       <div className="p-3 rounded-lg rounded-tl-none bg-muted/50 text-[11px] text-muted-foreground">
-                        Зверни увагу на лівий шлуночок. Як думаєш, чому він масивніший?
+                        Зверни увагу на лівий шлуночок. Як думаєш, чому він
+                        масивніший?
                       </div>
                       <div className="p-3 rounded-lg rounded-tr-none bg-accent/10 border border-accent/20 text-[11px] text-accent ml-auto w-4/5">
                         Тому що він качає кров по всьому тілу?

@@ -1,90 +1,90 @@
 import React from "react";
-import { Section } from "@/components/ui/Section";
-import { CheckCircle, ArrowDown } from "lucide-react";
+import { Section, SectionTitle } from "@/components/ui/Section";
+import { CheckCircle2, Rocket, Sparkles, Globe } from "lucide-react";
 
 export const Roadmap: React.FC = () => {
   return (
     <Section id="roadmap">
-      <div className="grid md:grid-cols-2 gap-16">
+      <SectionTitle subtitle="Наш шлях до створення ідеального освітнього середовища.">
+        Дорожня карта
+      </SectionTitle>
+
+      <div className="grid md:grid-cols-2 gap-16 mt-12">
         {/* MVP Section */}
-        <div>
-          <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
+        <div className="glass p-8 rounded-[40px] border border-border/50 bg-popover/40">
+          <h3 className="text-2xl font-bold text-foreground mb-8 border-b border-border/50 pb-6 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center text-accent">
+              <Rocket size={20} />
+            </div>
             MVP{" "}
-            <span className="text-sm font-normal text-slate-500 ml-2">
-              (Current Version)
+            <span className="text-xs font-light text-muted-foreground ml-auto uppercase tracking-widest">
+              (Current)
             </span>
           </h3>
           <div className="space-y-4">
             {[
-              "Lesson Builder v1",
-              "Student View",
-              "Study Mode",
-              "Teacher Dashboard",
-              "Admin Dashboard",
-              "AI-пояснення",
+              "Lesson Builder v2.0",
+              "Student & Teacher Dashboards",
+              "AI Mentor (Text & Audio)",
+              "Study Mode Core",
+              "Basic Gamification",
             ].map((item, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 text-slate-700 dark:text-slate-300"
+                className="flex items-center gap-3 text-muted-foreground group"
               >
-                <CheckCircle className="text-accent" size={20} />
-                <span>{item}</span>
+                <CheckCircle2
+                  className="text-accent group-hover:scale-110 transition-transform"
+                  size={18}
+                />
+                <span className="text-sm font-medium">{item}</span>
               </div>
             ))}
           </div>
-          <div className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-xl">
-            <p className="text-sm text-slate-600 dark:text-slate-300">
-              Перша версія фокусується на створенні якісного контенту та
-              впровадженні AI-асистентів для вчителів та учнів.
-            </p>
-          </div>
         </div>
 
-        {/* Roadmap Section */}
-        <div>
-          <h3 className="text-3xl font-display font-bold text-slate-900 dark:text-white mb-8 border-b border-slate-200 dark:border-slate-800 pb-4">
-            Roadmap{" "}
-            <span className="text-sm font-normal text-slate-500 ml-2">
-              (Future)
+        {/* Future Section */}
+        <div className="glass p-8 rounded-[40px] border border-border/50 bg-popover/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 p-8 opacity-5">
+            <Globe size={100} className="text-foreground" />
+          </div>
+          <h3 className="text-2xl font-bold text-foreground mb-8 border-b border-border/50 pb-6 flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400">
+              <Sparkles size={20} />
+            </div>
+            Future{" "}
+            <span className="text-xs font-light text-muted-foreground ml-auto uppercase tracking-widest">
+              (Roadmap)
             </span>
           </h3>
-          <div className="relative border-l border-slate-200 dark:border-slate-800 ml-3 space-y-8 pb-4">
-            <div className="pl-8 relative">
-              <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 ring-4 ring-white dark:ring-darker"></span>
-              <h4 className="text-slate-900 dark:text-white font-bold text-lg">
-                XR Scene Builder
-              </h4>
-              <p className="text-slate-500 text-sm">
-                Інструмент для створення 3D сцен без коду.
-              </p>
-            </div>
-            <div className="pl-8 relative">
-              <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 ring-4 ring-white dark:ring-darker"></span>
-              <h4 className="text-slate-900 dark:text-white font-bold text-lg">
-                Віртуальні класи
-              </h4>
-              <p className="text-slate-500 text-sm">
-                Спільне навчання в одному віртуальному просторі.
-              </p>
-            </div>
-            <div className="pl-8 relative">
-              <span className="absolute -left-[5px] top-2 w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 ring-4 ring-white dark:ring-darker"></span>
-              <h4 className="text-slate-900 dark:text-white font-bold text-lg">
-                Мобільні додатки
-              </h4>
-              <p className="text-slate-500 text-sm">
-                Нативний досвід для iOS та Android.
-              </p>
-            </div>
-            <div className="pl-8 relative opacity-50">
-              <ArrowDown
-                className="text-slate-400 dark:text-slate-600"
-                size={20}
-              />
-            </div>
+          <div className="relative border-l border-border/50 ml-2.5 space-y-10 pb-4">
+            <RoadmapStep
+              title="XR Scene Builder"
+              desc="Створення 3D сцен без знання коду безпосередньо в браузері."
+            />
+            <RoadmapStep
+              title="Віртуальні класи 3.0"
+              desc="Спільне навчання в одному XR просторі з аватарами."
+            />
+            <RoadmapStep
+              title="Global Education Hub"
+              desc="Платформа для обміну уроками між вчителями всього світу."
+            />
           </div>
         </div>
       </div>
     </Section>
   );
 };
+
+const RoadmapStep = ({ title, desc }: { title: string; desc: string }) => (
+  <div className="pl-8 relative group">
+    <div className="absolute -left-[5.5px] top-1.5 w-2.5 h-2.5 rounded-full bg-muted border-2 border-border group-hover:border-purple-500 group-hover:bg-purple-500 transition-all"></div>
+    <h4 className="text-foreground font-bold text-base mb-1 tracking-tight">
+      {title}
+    </h4>
+    <p className="text-muted-foreground text-sm font-light leading-relaxed">
+      {desc}
+    </p>
+  </div>
+);
