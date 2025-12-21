@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Menu, X, LogOut, User } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { RoutePath } from "@/config/route-config";
 import { ThemeSelector } from "@/components/ThemeSelector";
 
@@ -18,12 +18,59 @@ const Navbar: React.FC<NavbarProps> = ({
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Smooth scroll to section
+  const scrollToSection = (sectionId: string, e?: React.MouseEvent<HTMLAnchorElement>) => {
+    if (e) {
+      e.preventDefault();
+    }
+    
+    // If we're not on the home page, navigate to home first
+    if (location.pathname !== RoutePath.HOME) {
+      window.location.href = `${RoutePath.HOME}#${sectionId}`;
+      return;
+    }
+
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offset = 100; // Offset for fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+    
+    setIsMobileOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle hash navigation on mount
+  useEffect(() => {
+    if (location.pathname === RoutePath.HOME && window.location.hash) {
+      const hash = window.location.hash.substring(1); // Remove #
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          const offset = 100; // Offset for fixed navbar
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 300); // Small delay to ensure page is rendered
+    }
+  }, [location.pathname]);
 
   // Close user menu when clicking outside
   useEffect(() => {
@@ -67,8 +114,14 @@ const Navbar: React.FC<NavbarProps> = ({
           isScrolled ? "px-8 py-4" : ""
         }`}
       >
-        <Link
-          to={RoutePath.HOME}
+        <a
+          href={RoutePath.HOME}
+          onClick={(e) => {
+            if (location.pathname === RoutePath.HOME) {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
           className="flex items-center gap-3 navbar-text"
         >
           <div className="relative w-6 h-6 flex items-center justify-center">
@@ -78,21 +131,30 @@ const Navbar: React.FC<NavbarProps> = ({
           <span className="navbar-text font-medium text-sm tracking-tight">
             Futurum XR
           </span>
-        </Link>
+        </a>
 
         <div className="hidden md:flex items-center gap-8 text-xs font-medium navbar-text-secondary">
-          <Link
-            to={RoutePath.CAPABILITIES}
-            className="navbar-text-hover transition-colors"
+          <a
+            href="#solutions"
+            onClick={(e) => scrollToSection("solutions", e)}
+            className="navbar-text-hover transition-colors cursor-pointer"
           >
-            Можливості
-          </Link>
-          <Link
-            to={RoutePath.ROADMAP}
-            className="navbar-text-hover transition-colors"
+            Рішення
+          </a>
+          <a
+            href="#examples"
+            onClick={(e) => scrollToSection("examples", e)}
+            className="navbar-text-hover transition-colors cursor-pointer"
+          >
+            Приклади
+          </a>
+          <a
+            href="#roadmap"
+            onClick={(e) => scrollToSection("roadmap", e)}
+            className="navbar-text-hover transition-colors cursor-pointer"
           >
             Roadmap
-          </Link>
+          </a>
         </div>
 
         <div className="flex items-center gap-4">
@@ -152,20 +214,27 @@ const Navbar: React.FC<NavbarProps> = ({
       {/* Mobile Menu Overlay */}
       {isMobileOpen && (
         <div className="md:hidden absolute top-20 left-4 right-4 glass rounded-[32px] p-6 flex flex-col gap-4 shadow-2xl animate-in fade-in slide-in-from-top-4 pointer-events-auto">
-          <Link
-            to={RoutePath.CAPABILITIES}
-            className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors"
-            onClick={() => setIsMobileOpen(false)}
+          <a
+            href="#solutions"
+            onClick={(e) => scrollToSection("solutions", e)}
+            className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors cursor-pointer"
           >
-            Можливості
-          </Link>
-          <Link
-            to={RoutePath.ROADMAP}
-            className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors"
-            onClick={() => setIsMobileOpen(false)}
+            Рішення
+          </a>
+          <a
+            href="#examples"
+            onClick={(e) => scrollToSection("examples", e)}
+            className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors cursor-pointer"
+          >
+            Приклади
+          </a>
+          <a
+            href="#roadmap"
+            onClick={(e) => scrollToSection("roadmap", e)}
+            className="text-sm font-medium navbar-text-secondary navbar-text-hover px-4 py-2 transition-colors cursor-pointer"
           >
             Roadmap
-          </Link>
+          </a>
 
           {/* Theme Selector in Mobile Menu */}
           <ThemeSelector
