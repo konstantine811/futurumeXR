@@ -73,7 +73,8 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 
     if (isThemeMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }
   }, [isThemeMenuOpen]);
 
@@ -114,8 +115,8 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({
 
       {/* Theme Dropdown */}
       {isThemeMenuOpen && (
-        <div className="absolute top-full right-0 mt-2 w-40 glass backdrop-blur-xl rounded-xl shadow-2xl py-2 overflow-hidden theme-menu-dropdown border">
-          <div className="px-1">
+        <div className="absolute top-full right-0 mt-2 w-40  glass  rounded-xl shadow-2xl py-2 overflow-hidden theme-menu-dropdown border">
+          <div className="px-1 bg-background/80">
             {THEMES.map((themeOption) => (
               <button
                 key={themeOption}
@@ -140,5 +141,3 @@ export const ThemeSelector: React.FC<ThemeSelectorProps> = ({
     </div>
   );
 };
-
-
