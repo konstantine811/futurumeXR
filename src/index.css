@@ -489,3 +489,129 @@ body {
 .theme-menu-dropdown {
   animation: themeMenuFadeIn 0.2s ease-out;
 }
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.dark .grid-pattern,
+.kids .grid-pattern,
+.highcontrast .grid-pattern,
+.code .grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+.light .grid-pattern,
+.exam .grid-pattern {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+/* Text gradient */
+.text-gradient-primary {
+  background: linear-gradient(to right, #34e1a1, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.light .text-gradient-primary,
+.exam .text-gradient-primary {
+  background: linear-gradient(to right, #0066cc, #004499);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.kids .text-gradient-primary {
+  background: linear-gradient(to right, #ff6b9d, #ff8cc8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.highcontrast .text-gradient-primary {
+  background: linear-gradient(to right, #ffff00, #ffdd00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.code .text-gradient-primary {
+  background: linear-gradient(to right, #00d9ff, #0099cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 3D Perspective utilities */
+.perspective-\[2000px\] {
+  perspective: 2000px;
+}
+
+.rotate-x-6 {
+  transform: rotateX(6deg);
+}
+
+.rotate-x-0 {
+  transform: rotateX(0deg);
+}
+
+.origin-center {
+  transform-origin: center;
+}
+
+/* Animation utilities */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom-8 {
+  from {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoom-in-95 {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-in {
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+.slide-in-from-bottom-8 {
+  animation: slide-in-from-bottom-8 0.5s ease-out;
+}
+
+.zoom-in-95 {
+  animation: zoom-in-95 0.5s ease-out;
+}
