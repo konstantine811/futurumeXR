@@ -1,28 +1,53 @@
 import React from "react";
 import { Users, Presentation, HeartHandshake } from "lucide-react";
 
+interface RoleItemProps {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}
+
+const RoleItem: React.FC<RoleItemProps> = ({ icon, title, desc }) => (
+  <div className="flex gap-5 group">
+    <div className="w-12 h-12 rounded-2xl bg-muted/30 border border-border/50 flex items-center justify-center flex-shrink-0 group-hover:border-accent/30 transition-all">
+      {icon}
+    </div>
+    <div>
+      <h4 className="text-foreground font-bold text-lg mb-1 tracking-tight">
+        {title}
+      </h4>
+      <p className="text-muted-foreground text-sm font-light leading-relaxed">
+        {desc}
+      </p>
+    </div>
+  </div>
+);
+
 export const TeacherRole: React.FC = () => {
   return (
-    <section id="teacher" className="relative py-20 md:py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
+    <section
+      id="teacher"
+      className="relative py-20 md:py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden"
+    >
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/10 blur-[120px] rounded-full pointer-events-none"></div>
-      
+
       <div className="relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          <div className="lg:w-1/2 order-2 lg:order-1 animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <div className="relative rounded-2xl overflow-hidden border border-accent/20 shadow-xl group">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-accent/20 to-blue-500/20 rounded-[32px] blur-xl opacity-50"></div>
+            <div className="relative rounded-[32px] overflow-hidden border border-border/50 glass shadow-2xl">
               <img
-                src="https://picsum.photos/800/600?grayscale"
+                src="./images/teacher-role.png"
                 alt="Teacher using technology"
-                className="w-full h-auto opacity-90 hover:opacity-100 transition-opacity duration-300"
+                className="w-full h-auto opacity-60 group-hover:opacity-80 transition-opacity duration-700"
               />
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-background to-transparent h-32" />
-              <div className="absolute bottom-6 left-6 right-6">
-                <div className="bg-popover/90 backdrop-blur-md border border-border/50 p-4 rounded-xl shadow-lg glass-panel">
-                  <p className="text-foreground font-bold">
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+              <div className="absolute bottom-8 left-8 right-8">
+                <div className="glass border-border/50 p-5 rounded-2xl backdrop-blur-xl">
+                  <p className="text-foreground font-bold text-sm tracking-tight mb-1 uppercase">
                     Педагог — архітектор знань
                   </p>
-                  <p className="text-xs text-muted-foreground mt-1">
+                  <p className="text-[11px] text-muted-foreground font-light">
                     AI лише асистент, який бере на себе рутину.
                   </p>
                 </div>
@@ -30,57 +55,33 @@ export const TeacherRole: React.FC = () => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 order-1 lg:order-2 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6">
-              Вчитель у центрі <span className="text-gradient-primary">платформи</span>
+          <div className="space-y-10 text-left">
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 tracking-tight leading-tight">
+              Вчитель у центрі <br />
+              <span className="text-gradient-primary">платформи</span>
             </h2>
-            <p className="text-muted-foreground text-lg mb-10 leading-relaxed">
-              Система не замінює вчителя, а надає йому суперсилу. Ми автоматизуємо
-              рутину, щоб ви могли присвятити час найголовнішому — учням.
+            <p className="text-muted-foreground text-lg font-light leading-relaxed">
+              Система не замінює вчителя, а надає йому суперсилу. Ми
+              автоматизуємо рутину, щоб ви могли присвятити час найголовнішому —
+              учням.
             </p>
 
-            <div className="space-y-8">
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center text-indigo-500 shrink-0 group-hover:bg-indigo-500/20 transition-colors">
-                  <Presentation />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-foreground mb-1">
-                    Креативні уроки
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Створення цікавих презентацій та інтерактивів за хвилини.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent shrink-0 group-hover:bg-accent/20 transition-colors">
-                  <Users />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-foreground mb-1">
-                    Автоматизація рутини
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Миттєва перевірка тестів та домашніх завдань AI-алгоритмами.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex gap-4 group">
-                <div className="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center text-pink-500 shrink-0 group-hover:bg-pink-500/20 transition-colors">
-                  <HeartHandshake />
-                </div>
-                <div>
-                  <h4 className="text-xl font-bold text-foreground mb-1">
-                    Посилення ролі педагога
-                  </h4>
-                  <p className="text-muted-foreground">
-                    Більше часу на менторство, підтримку та індивідуальний підхід.
-                  </p>
-                </div>
-              </div>
+            <div className="space-y-6">
+              <RoleItem
+                icon={<Presentation className="text-accent" />}
+                title="Креативні уроки"
+                desc="Створення цікавих презентацій та інтерактивів за хвилини."
+              />
+              <RoleItem
+                icon={<Users className="text-blue-400" />}
+                title="Автоматизація рутини"
+                desc="Миттєва перевірка тестів та домашніх завдань AI-алгоритмами."
+              />
+              <RoleItem
+                icon={<HeartHandshake className="text-purple-400" />}
+                title="Посилення ролі педагога"
+                desc="Більше часу на менторство, підтримку та індивідуальний підхід."
+              />
             </div>
           </div>
         </div>

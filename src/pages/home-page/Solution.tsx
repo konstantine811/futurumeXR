@@ -12,48 +12,43 @@ const solutions = [
 
 export const Solution: React.FC = () => {
   return (
-    <section id="features" className="relative py-20 md:py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
+    <section id="solutions" className="relative py-20 md:py-32 px-4 md:px-8 max-w-7xl mx-auto w-full overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-40 pointer-events-none"></div>
       
       <div className="relative z-10">
-        <div className="bg-popover rounded-3xl p-8 md:p-16 border border-border relative overflow-hidden shadow-2xl glass-panel">
-          {/* Decorative glow */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent/20 rounded-full blur-[80px]" />
-          <div className="absolute -bottom-24 -left-24 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]" />
-
-          <div className="grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
-              <h2 className="text-3xl md:text-5xl font-display font-bold text-foreground mb-6">
-                FuturumXR — це <br />
+        <div className="glass rounded-[40px] p-8 md:p-16 border border-border/50 relative overflow-hidden shadow-2xl bg-popover/50">
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-accent/10 rounded-full blur-[100px]" />
+          
+          <div className="grid md:grid-cols-2 gap-16 items-center relative z-10">
+            <div>
+              <div className="text-accent text-xs font-bold tracking-[0.2em] uppercase mb-4">Наше рішення</div>
+              <h2 className="text-4xl md:text-5xl font-display font-bold text-foreground mb-6 tracking-tighter leading-tight">
+                FuturumXR — це <br/>
                 <span className="text-gradient-primary">відповідь на виклики</span>
               </h2>
-              <p className="text-muted-foreground text-lg mb-8 leading-relaxed">
-                Ми створили екосистему, де технології служать педагогіці, а
-                навчання стає захоплюючою пригодою.
+              <p className="text-muted-foreground text-lg mb-10 leading-relaxed font-light">
+                Ми створили екосистему, де технології служать педагогіці, а навчання стає захоплюючою пригодою.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                 {solutions.map((item, idx) => (
-                  <div key={idx} className="flex items-center gap-3 animate-in fade-in slide-in-from-bottom-8" style={{ animationDelay: `${idx * 100}ms` }}>
-                    <CheckCircle2 className="text-accent shrink-0" size={20} />
-                    <span className="text-foreground font-medium">{item}</span>
+                  <div key={idx} className="flex items-center gap-3 group">
+                    <div className="w-5 h-5 rounded-full bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors">
+                      <CheckCircle2 className="text-accent" size={14} />
+                    </div>
+                    <span className="text-foreground font-medium text-sm">{item}</span>
                   </div>
                 ))}
               </div>
             </div>
-
-            <div className="relative animate-in fade-in zoom-in-95 duration-1000 delay-300">
-              {/* Abstract Graphic Representation */}
-              <div className="aspect-square rounded-2xl bg-popover border border-border p-2 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500 group">
-                <div className="w-full h-full rounded-xl bg-gradient-to-br from-muted/50 to-popover relative overflow-hidden flex items-center justify-center">
+            
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-tr from-accent/20 to-blue-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+              <div className="aspect-square rounded-3xl bg-popover border border-border/50 p-2 shadow-2xl rotate-3 group-hover:rotate-0 transition-transform duration-700 overflow-hidden">
+                <div className="w-full h-full rounded-2xl bg-gradient-to-br from-muted/50 to-popover relative flex items-center justify-center">
                   <div className="absolute inset-0 grid-pattern opacity-20"></div>
-                  <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent"></div>
                   <div className="text-center p-6 relative z-10">
-                    <div className="text-6xl font-display font-bold text-gradient-primary mb-2">
-                      100%
-                    </div>
-                    <div className="text-muted-foreground uppercase tracking-widest text-sm">
-                      Залученість
-                    </div>
+                    <div className="text-7xl font-display font-bold text-foreground mb-2 tracking-tighter">100%</div>
+                    <div className="text-accent uppercase tracking-[0.3em] text-[10px] font-bold">Залученість учнів</div>
                   </div>
                 </div>
               </div>

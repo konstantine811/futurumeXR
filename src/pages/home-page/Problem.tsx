@@ -4,22 +4,22 @@ import { Frown, Clock, Layers, BatteryWarning } from "lucide-react";
 
 const problems = [
   {
-    icon: <BatteryWarning size={32} />,
+    icon: <BatteryWarning size={24} />,
     title: "Пасивні уроки",
     desc: "Учні — лише слухачі. Низький рівень залучення призводить до швидкої втрати уваги.",
   },
   {
-    icon: <Layers size={32} />,
+    icon: <Layers size={24} />,
     title: "Відсутність інтерактивності",
     desc: "Статичні підручники та PDF-файли не відповідають кліповому мисленню сучасного покоління.",
   },
   {
-    icon: <Clock size={32} />,
+    icon: <Clock size={24} />,
     title: "Перевантажені вчителі",
     desc: "Величезна кількість паперової роботи та рутинної перевірки забирає час на творчість.",
   },
   {
-    icon: <Frown size={32} />,
+    icon: <Frown size={24} />,
     title: "Слабка мотивація",
     desc: "Застарілі методики не надихають учнів досягати нових вершин у навчанні.",
   },
@@ -46,21 +46,18 @@ export const Problem: React.FC = () => {
           {problems.map((item, idx) => (
             <div
               key={idx}
-              className="group relative p-8 rounded-2xl bg-popover border border-border shadow-lg hover:border-destructive/30 transition-all duration-300 animate-in fade-in slide-in-from-bottom-8"
+              className="glass p-8 rounded-3xl border border-border/50 hover:border-destructive/20 transition-all duration-500 group animate-in fade-in slide-in-from-bottom-8"
               style={{ animationDelay: `${idx * 100}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
-              <div className="relative z-10">
-                <div className="w-14 h-14 rounded-xl bg-muted flex items-center justify-center text-muted-foreground mb-6 group-hover:bg-destructive/10 group-hover:text-destructive transition-all duration-300">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl font-bold text-foreground mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed text-sm">
-                  {item.desc}
-                </p>
+              <div className="w-12 h-12 rounded-2xl bg-muted/30 border border-border/50 flex items-center justify-center text-muted-foreground group-hover:text-destructive group-hover:bg-destructive/10 transition-colors mb-6">
+                {item.icon}
               </div>
+              <h3 className="text-xl font-bold text-foreground mb-3 tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-muted-foreground leading-relaxed text-sm font-light">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
