@@ -9,9 +9,6 @@ import {
 import Preloader from "./components/Preloader";
 import { RoutePath } from "./config/route-config";
 import { getDashboardPathByRole, isAdminRole } from "./config/roles";
-import Navbar from "./components/Navbar";
-import PageTransition from "./components/PageTransition";
-import { Footer } from "./components/Footer";
 import { AuthModal } from "./components/auth/AuthModal";
 import { OnboardingWizard } from "./components/OnboardingWizard";
 import { RoleSelectionModal } from "./components/RoleSelectionModal";
@@ -117,15 +114,17 @@ function AppContent() {
   ]);
 
   // Redirect to dashboard if user completed onboarding and on home page
-  // НЕ редіректимо, якщо показується onboarding
+  // НЕ редіректимо, якщо показується onboarding або показується WelcomePage
   useEffect(() => {
     if (
       user &&
       user.onboardingCompleted &&
       !showOnboarding &&
-      location.pathname === RoutePath.HOME
+      location.pathname === RoutePath.HOME &&
+      !user // Це старий логічний конфлікт, тому що тепер для залогінених показуємо WelcomePage
     ) {
-      redirectToDashboard(user.role);
+      // Не редіректимо автоматично - користувач може залишитись на WelcomePage
+      // redirectToDashboard(user.role);
     }
   }, [user, showOnboarding, location.pathname, redirectToDashboard]);
 
@@ -222,34 +221,25 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-darker text-slate-600 dark:text-slate-300 font-sans selection:bg-accent selection:text-darker overflow-x-hidden transition-colors duration-300">
-      <Navbar />
       <Suspense fallback={<Preloader text="FUTURUM XR" />}>
-        <PageTransition>
-          <Routes>
-            <Route path={RoutePath.HOME} element={<Home />} />
-            <Route path={RoutePath.CAPABILITIES} element={<Capabilities />} />
-            <Route path={RoutePath.ROADMAP} element={<Roadmap />} />
-            <Route
-              path={RoutePath.THEME_SETTINGS}
-              element={<ThemeSettings />}
-            />
-            <Route path="/dashboard/:role" element={<DashboardPage />} />
-            <Route
-              path={RoutePath.STUDENT_DASHBOARD}
-              element={<DashboardPage />}
-            />
-            <Route
-              path={RoutePath.TEACHER_DASHBOARD}
-              element={<DashboardPage />}
-            />
-            <Route
-              path={RoutePath.ADMIN_DASHBOARD}
-              element={<DashboardPage />}
-            />
-          </Routes>
-        </PageTransition>
+        <Routes>
+          <Route path={RoutePath.HOME} element={<Home />} />
+          <Route path={RoutePath.CAPABILITIES} element={<Capabilities />} />
+          <Route path={RoutePath.ROADMAP} element={<Roadmap />} />
+          <Route path={RoutePath.THEME_SETTINGS} element={<ThemeSettings />} />
+          <Route path="/dashboard/:role" element={<DashboardPage />} />
+          <Route
+            path={RoutePath.STUDENT_DASHBOARD}
+            element={<DashboardPage />}
+          />
+          <Route
+            path={RoutePath.TEACHER_DASHBOARD}
+            element={<DashboardPage />}
+          />
+          <Route path={RoutePath.ADMIN_DASHBOARD} element={<DashboardPage />} />
+        </Routes>
       </Suspense>
-      <Footer />
+
       {/* Показуємо AuthModal тільки якщо користувач НЕ авторизований та модальне вікно відкрите */}
       {!user && isAuthModalOpen && (
         <AuthModal

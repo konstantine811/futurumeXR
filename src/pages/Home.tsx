@@ -12,13 +12,20 @@ import { Dashboards } from "./home-page/DashBoards";
 import { Architecture } from "./home-page/Architecture";
 import { FutureXR } from "./home-page/FutureXR";
 import { Roadmap } from "./home-page/Roadmap";
+import Navbar from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { WelcomePage } from "./WelcomePage";
+import { useAuthStore } from "@/stores/authStore";
 
 function Home() {
   const [activeLesson, setActiveLesson] = useState<string | null>(null);
+  const { user } = useAuthStore();
   return (
     <>
+      <Navbar />
       <main className="flex flex-col gap-0">
-        <Hero />
+        {user ? <WelcomePage /> : <Hero />}
+
         <Problem />
         <Solution />
         <TeacherRole />
@@ -40,6 +47,7 @@ function Home() {
           onClose={() => setActiveLesson(null)}
         />
       )}
+      <Footer />
     </>
   );
 }
