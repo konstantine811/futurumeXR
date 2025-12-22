@@ -42,7 +42,7 @@ export const Dashboards: React.FC = () => {
       <div className="relative group">
         <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10 rounded-[40px] blur-3xl opacity-50"></div>
         <div className="relative glass border border-border/50 rounded-[40px] overflow-hidden shadow-2xl bg-popover/40">
-          <div className="p-1 max-h-[600px] overflow-y-auto custom-scrollbar">
+          <div className="p-1 overflow-y-auto custom-scrollbar">
             {activeTab === "teacher" && (
               <div className="animate-in fade-in zoom-in-95 duration-500">
                 <TeacherDashboard />
